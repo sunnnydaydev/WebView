@@ -1,0 +1,15 @@
+一、webView 的第一个坑：Denied starting an intent without a user gesture
+
+     解决方案：重写setWebViewClient return false（https://blog.csdn.net/v_oo_v/article/details/78499934）
+
+二、明文问题
+
+     解决方案：       android:allowClearUserData="true"
+                      android:usesCleartextTraffic="true"
+
+三、android 与js 相互调用：webView 控件是载体，webView为android 控件，可以加载网页url。这样android 与js就可建立联系。
+
+1、安卓调用js两种方式：
+
+     通过WebView的loadUrl（）
+     通过WebView的evaluateJavascript（）

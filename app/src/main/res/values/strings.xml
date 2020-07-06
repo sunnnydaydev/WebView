@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">WebView</string>
+    <string name="title_activity_js_call_android">JsCallAndroidActivity</string>
+</resources>
