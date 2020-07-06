@@ -33,7 +33,7 @@ class AndroidCallJsActivity : AppCompatActivity() {
         web_view.loadUrl("file:///android_asset/1.html")//加载assets文件夹下的html文件时使用固定格式语法即可：file:///android_asset/文件名.html
         web_view.webViewClient = object : WebViewClient(){}
 
-         callByLoadUrl()
+        callByLoadUrl()
         //callByEvaluateJavascript()
         //webView只是载体，内容的渲染需要使用webViewChromeClient类去实现,所以在这里写回调处理。
         web_view.webChromeClient = object : WebChromeClient() {
