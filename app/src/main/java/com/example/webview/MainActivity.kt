@@ -32,12 +32,12 @@ class MainActivity : AppCompatActivity() {
      * */
     private fun webChromeClient() {
         my_web_view.webChromeClient = object : WebChromeClient() {
-            // 获得网页进度加载
+            // 获得网页进度时回调
             override fun onProgressChanged(view: WebView?, newProgress: Int) {
                 super.onProgressChanged(view, newProgress)
             }
 
-            // 获取网页的标题
+            // 获取网页的标题时回调
             override fun onReceivedTitle(view: WebView?, title: String?) {
                 super.onReceivedTitle(view, title)
             }
@@ -55,11 +55,11 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
 
-            // 支持js Confirm 对话框，true代表点击确定，false 代表点击取消。
+            // js Confirm 对话框拦截，true代表点击确定，false 代表点击取消。
             override fun onJsConfirm(view: WebView?, url: String?, message: String?, result: JsResult?): Boolean {
                 return super.onJsConfirm(view, url, message, result)
             }
-           // 弹出输入框的拦截，true 代表返回输入框的值，false 代表返回null
+           // 输入框拦截，true 代表返回输入框的值，false 代表返回null
             override fun onJsPrompt(
                 view: WebView?,
                 url: String?,
@@ -122,9 +122,9 @@ class MainActivity : AppCompatActivity() {
         my_web_view.webViewClient = object : WebViewClient() {
             //加载url、返回false 代表使用webView 加载url 不使用系统浏览器。
             override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
-// 如下loadUrl，然后return true 这种也代表不使用系统浏览器。但是官方建议直接 return false
-//                view?.loadUrl("https://www.baidu.com")
-//                return true
+                 // 如下loadUrl，然后return true 这种也代表不使用系统浏览器。但是官方建议直接 return false
+                 // view?.loadUrl("https://www.baidu.com")
+                 // return true
                 return false// 直接return 即可
             }
 

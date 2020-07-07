@@ -14,7 +14,16 @@ import kotlinx.android.synthetic.main.activity_android_call_js.*
  * Android call js method practice
  * 两种方式：
  * 1、webView的loadUri(" javascript:js方法()")
+ *    这种方式一般调用的为js的dialog方法，使用安卓的WebChromeClient 对应回调方法进行拦截处理。
  * 2、webView的evaluateJavascript
+ *     直接调用js的方法，还可以获得js方法返回值回调
+ *     js方法结果回调为String 类型值
+ *     js方法无返回值，这里回调为null
+ *
+ *     建议以这种方式，既可快捷获得返回值，又可通过1中的dialog回调处理。
+ *
+ *     小结：Android call js method
+ *       安卓调用js方法后可以在安卓端获得结果回调处理。
  * */
 class AndroidCallJsActivity : AppCompatActivity() {
     val mContext = this
