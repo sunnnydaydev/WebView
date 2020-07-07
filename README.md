@@ -1,6 +1,6 @@
 # Android WebView
 
-![](https://github.com/sunnnydaydev/WebViewPractise/blob/master/WebView.png)
+![](https://github.com/sunnnydaydev/WebView/blob/master/WebView.png)
 
 ### 一、简介
 
