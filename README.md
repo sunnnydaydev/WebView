@@ -473,5 +473,63 @@ web_view_th.webChromeClient = object : WebChromeClient() {
 
 
 
-待续！！！
+### 五、webView相关优化建议
 
+###### 1、给 WebView 加一个加载进度条
+
+> 为了友好展示，重写 WebChromeClient 的 onProgressChanged 方法。未加载完成时展示loading进度条
+
+###### 2、提高 HTML 网页加载速度，等页面 finsh 在加载图片
+
+```java
+public void load () {
+    if(Build.VERSION.SDK_INT >= 19) {
+        webView.getSettings().setLoadsImagesAutomatically(true);
+    } else {
+        webView.getSettings().setLoadsImagesAutomatically(false);
+    }
+}
+```
+
+###### 3、onReceivedError 时加载自定义界面
+
+> web的error 页面比较丑，我们可以在加载失败时，展示安卓自定义的错误展示页。
+
+4、动画、银屏、视频 合适加载释放
+
+>动画、银屏、视频 加载会造成cpu、电量消耗可在activity、 fragment的onResume、onStop进行开关控制。
+
+
+
+### 六、采坑
+
+###### 1、明文传输控制
+
+> Android P 阻止加载任何 http 的请求,在清单文件application节点 添加android:usesCleartextTraffic="true"
+
+###### 2、Android 5.0 之后 WebView 禁止加载 http 与 https 混合内容 开启如下：
+
+```java
+if (Build.VERSION.SDK_INT>Build.VERSION_CODES.LOLLIPOP){
+          webview.getSettings().
+              setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+        }
+```
+
+###### 3、硬件加速开启导致问题
+
+>比如不能打开 PDF，播放视频花屏等等。关闭硬件加速。
+
+###### 4、重写webViewClient的shouldOverrideUrlLoading
+
+> 否则系统不知道你是想用webview打开url 还是使用系统浏览器。
+
+参考：
+
+https://www.jianshu.com/p/3c94ae673e2a
+
+https://blog.csdn.net/carson_ho/article/details/64904691
+
+https://developer.android.google.cn/reference/kotlin/android/webkit/WebView?hl=en
+
+https://blog.csdn.net/harvic880925/article/details/51464687
