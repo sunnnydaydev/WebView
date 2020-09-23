@@ -121,9 +121,9 @@
                 // 不要使用super，否则有些手机访问不了，因为包含了一条 handler.cancel()
                 // super.onReceivedSslError(view, handler, error);
               
-                // 接受所有网站的证书，忽略SSL错误，执行访问网页
-                handler?.proceed() // 等待证书相应
-                // handler?.cancel() // 挂起连接，默认方式。
+                // 接受所有网站的证书，忽略SSL错误，执行访问网页。这种方式在发生ssl不会影响网页加载。但是google play 认为这是不安全的操作。会给你警告。
+                handler?.proceed() 
+                // handler?.cancel() // 发生ssl时挂起连接表现为白屏，默认方式。
 
             }
         }
