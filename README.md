@@ -508,7 +508,7 @@ public void load () {
 
 > Android P 阻止加载任何 http 的请求,在清单文件application节点 添加android:usesCleartextTraffic="true"
 
-###### 2、Android 5.0 之后 WebView 禁止加载 http 与 https 混合内容 开启如下：
+###### 2、Android 5.0 之后 WebView 禁止加载 http 与 https 混合内容 。这样会造成某些资源加载失败。
 
 ```java
 if (Build.VERSION.SDK_INT>Build.VERSION_CODES.LOLLIPOP){
@@ -516,6 +516,19 @@ if (Build.VERSION.SDK_INT>Build.VERSION_CODES.LOLLIPOP){
               setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         }
 ```
+
+>例如：https://www.aaa.com.cn/a/b/c/d/e/index.html?uid=0011&URL=http://www.bbb.com.cn/1.png 这个url
+>
+>1、实际页面为：https://www.aaa.com.cn/a/b/c/d/e/index.html 后面追加了一些参数
+>
+>2、h5页面上src标签加载http://www.bbb.com.cn/1.png
+>
+>此时你使用webview.loadUrl("https://www.aaa.com.cn/a/b/c/d/e/index.html?uid=0011&URL=http://www.bbb.com.cn/1.png") 就会出现h5 图片显示失败。
+>
+>解决方案开启MixedContentMode
+
+
+
 
 ###### 3、硬件加速开启导致问题
 
@@ -525,7 +538,17 @@ if (Build.VERSION.SDK_INT>Build.VERSION_CODES.LOLLIPOP){
 
 > 否则系统不知道你是想用webview打开url 还是使用系统浏览器。
 
+
+###### 5、webview白屏问题
+>原因：页面进度不到100%时显示的就是白屏，进度到100时开始加载网页资源。
+>
+>解决:网上方案较多这里提示一种：进度不到100时展示加载提示。
+>
+>
+
 参考：
+
+https://tech.meituan.com/2017/06/09/webviewperf.html
 
 https://www.jianshu.com/p/3c94ae673e2a
 
